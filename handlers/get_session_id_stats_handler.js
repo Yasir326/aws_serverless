@@ -19,6 +19,7 @@ module.exports.getCourseSessionStats = (event, context, callback) => {
     Key: {
       id: courseId,
     },
+    sessionId,
   };
 
   return db.get(params).promise().then(res => {
