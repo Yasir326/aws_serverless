@@ -1,9 +1,16 @@
 "use strict";
 const AWS = require("aws-sdk");
 const db = new AWS.DynamoDB.DocumentClient({ apiVersion: "2012-08-10" });
-const { response, sortByDate } = require("./helper_functions");
+
 
 const postsTable = process.env.POSTS_TABLE;
+
+const response = (statusCode, message) => {
+  return {
+    statusCode: statusCode,
+    body: JSON.stringify(message),
+  };
+};
 
 module.exports.getCourseSessionStats = (event, context, callback) => {
   const { courseId, sessionId } = event.pathParameters;
