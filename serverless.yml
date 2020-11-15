@@ -1,0 +1,63 @@
+service: sls
+
+custom:
+  settings:
+    POSTS_TABLE: posts
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-2
+  environment: ${self:custom.settings}
+  iamRoleStatements:
+   - Effect: "Allow"
+     Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+     Resource:
+      - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:custom.settings.POSTS_TABLE}"
+
+functions:
+  createPost:
+    handler: handler.postCourseStats
+    events:
+    - http:
+        path: /courses/{courseId}
+        method: post
+
+functions:
+  createPost:
+    handler: handler.getCourseStats
+    events:
+    - http:
+        path: /courses/{courseId}
+        method: get
+        
+functions:
+  createPost:
+    handler: handler.getSessionIdStats
+    events:
+    - http:
+        path: courses/{courseId}/sessions/{sessionId}
+        method: get           
+
+
+resources:
+  Resources:
+    PostsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+        KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.settings.POSTS_TABLE}

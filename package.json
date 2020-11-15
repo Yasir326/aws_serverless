@@ -1,0 +1,14 @@
+{
+  "name": "seneca",
+  "version": "1.0.0",
+  "description": "serverless crud api",
+  "main": "index.js",
+  "repository": "https://github.com/Yasir326/aws_serverless.git",
+  "author": "Yasir Khan",
+  "license": "MIT",
+  "dependencies": {
+    "serverless": "^2.11.1",
+    "serverless-offline": "^6.8.0",
+    "uuid": "^8.3.1"
+  }
+}
