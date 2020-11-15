@@ -23,28 +23,25 @@ provider:
 
 functions:
   createPost:
-    handler: handler.postCourseStats
+    handler: handlers/post_course_stats_handler.postCourseStats
     events:
     - http:
         path: /courses/{courseId}
         method: post
 
-functions:
-  createPost:
-    handler: handler.getCourseStats
+  getPost:
+    handler: handlers/get_session_id_stats_handler.getCourseStats
     events:
     - http:
         path: /courses/{courseId}
         method: get
         
-functions:
-  createPost:
-    handler: handler.getSessionIdStats
+  getPosts:
+    handler: handlers/get_session_id_stats_handler.getCourseSessionStats
     events:
     - http:
         path: courses/{courseId}/sessions/{sessionId}
         method: get           
-
 
 resources:
   Resources:
