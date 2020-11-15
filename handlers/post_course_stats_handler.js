@@ -6,13 +6,6 @@ const { response } = require("./helper_functions")
 
 const postsTable = process.env.POSTS_TABLE;
 
-const response = (statusCode, message) => {
-  return {
-    statusCode: statusCode,
-    body: JSON.stringify(message),
-  };
-};
-
 module.exports.postCourseStats = (event, context, callback) => {
   const reqBody =
     typeof event.body === "string" ? JSON.parse(event.body) : event.body;

@@ -5,7 +5,7 @@ const { response, sortByDate } = require("./helper_functions");
 
 const postsTable = process.env.POSTS_TABLE;
 
-module.exports.getCourseStats = (event, context, callback) => {
+module.exports.getCourseSessionStats = (event, context, callback) => {
   const { courseId, sessionId } = event.pathParameters;
   const params = {
     TableName: postsTable,
