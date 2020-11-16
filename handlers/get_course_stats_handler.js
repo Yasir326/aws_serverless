@@ -15,8 +15,12 @@ module.exports.getCourseStats = (event, context, callback) => {
   const { courseId } = event.pathParameters;
   const params = {
     TableName: postsTable,
-    Key: {
-      id: courseId,
+    KeyConditionExpression: "#courseId = :courseId",
+    ExpressionAttributeNames: {
+      "#courseId": "courseId",
+    },
+    ExpressionAttributeValues: {
+      ":courseId": courseId,
     },
   };
 

@@ -14,13 +14,13 @@ const response = (statusCode, message) => {
 
 module.exports.getCourseSessionStats = (event, context, callback) => {
   const { courseId, sessionId } = event.pathParameters;
-  const params = {
-    TableName: postsTable,
-    Key: {
-      id: courseId,
-    },
-    sessionId,
-  };
+    const params = {
+      TableName: postsTable,
+      Key: {
+        workoutId: courseId,
+        sessionId: sessionId,
+      },
+    };
 
   return db.get(params).promise().then(res => {
       if(res.item) {callback(null, response(200, res.Item));} else {

@@ -49,11 +49,15 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
-        - AttributeName: "id"
-          AttributeType: "S"
+        - AttributeName: "courseId"
+          AttributeType: "N"
+        - AttributeName: "sessionId"
+          AttributeType: "S"  
         KeySchema:
-        - AttributeName: "id"
+        - AttributeName: "courseId"
           KeyType: "HASH"
+        - AttributeName: "sessionId"
+          KeyType: "RANGE"  
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
